@@ -49,7 +49,7 @@ start-operator: ## start operator (part of quickstart)
 	npx tsc && node dist/index.js
 
 spam-tasks: ## start tasks spamming (part of quickstart)
-	tsc && node dist/createNewTasks.js
+	npx tsc && node dist/createNewTasks.js
 
 -----------------------------: ##
 _____HELPER_____: ##
