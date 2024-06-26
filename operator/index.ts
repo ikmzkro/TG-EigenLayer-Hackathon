@@ -39,13 +39,32 @@ const signAndRespondToTask = async (taskIndex: number, taskCreatedBlock: number,
 };
 
 const registerOperator = async () => {
-    const tx1 = await delegationManager.registerAsOperator({
-        earningsReceiver: await wallet.address,
-        delegationApprover: "0x0000000000000000000000000000000000000000",
+    console.log('(=^・^=)' );
+    // https://docs.rio.network/contracts-and-tooling/source-code/interfaces/eigenlayer/idelegationmanager
+    
+    // https://docs.rio.network/contracts-and-tooling/source-code/interfaces/eigenlayer/idelegationmanager#earningsreceiver
+    const earningsReceiver = await wallet.address
+    console.log('earningsReceiver', earningsReceiver);
+    
+    // https://docs.rio.network/contracts-and-tooling/source-code/interfaces/eigenlayer/idelegationmanager#delegationapprover
+    const delegationApproverAddress = await delegationManager.delegationApprover(earningsReceiver);
+    console.log('delegationApproverAddress', delegationApproverAddress);
+    // delegationApproverAddress 0x0000000000000000000000000000000000000000
+    
+    try {
+      const tx1 = await delegationManager.registerAsOperator({
+        earningsReceiver: earningsReceiver,
+        delegationApprover: delegationApproverAddress,
         stakerOptOutWindowBlocks: 0
-    }, "");
-    await tx1.wait();
-    console.log("Operator registered on EL successfully");
+      }, {
+        gasLimit: "300000 "
+      });
+      console.log('tx1', tx1);
+      await tx1.wait();
+      console.log("Operator registered on EL successfully");
+    } catch (error) {
+      console.log('error', error);
+    }
 
     const salt = ethers.utils.hexlify(ethers.utils.randomBytes(32));
     const expiry = Math.floor(Date.now() / 1000) + 3600; // Example expiry, 1 hour from now
