@@ -1,3 +1,24 @@
+# Tasks
+
+- [ ] NFT作成コントラクト（NFTCreatorContract）
+
+  - NFTをミントする関数を実装する
+  - メタデータ作成をトリガーするイベントを発行する
+
+- [ ] メタデータの作成と保存（NFTMetadataCreator）
+
+  - NFTCreatorContractからのイベントを受信してメタデータを作成
+  - 作成したメタデータをPrisma等を使ってDBに保存
+
+- [ ] メタデータへのアクセス（NFTMetadataServer）
+
+  - TPリクエストを受け取り、DBからメタデータを取得して返す
+
+- [ ] CLIからのコントラクトコール
+
+  - NFTCreatorContractをコールしてNFTをミント
+  - HTTPコールでNFTMetadataServerにアクセスし、メタデータを取得
+
 # Hello World AVS
 
 Welcome to the Hello World AVS.
