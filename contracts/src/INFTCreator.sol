@@ -1,0 +1,11 @@
+// SPDX-License-Identifier: UNLICENSED
+pragma solidity ^0.8.9;
+
+interface INFTCreator {
+    // EVENTS
+    event Minted(uint256 tokenId, address owner);
+
+    // STRUCTS
+
+    // FUNCTIONS
+}
