@@ -6,7 +6,6 @@ import { Counters } from "@openzeppelin/contracts/utils/Counters.sol";
 import { ERC2771Context } from "@openzeppelin/contracts/metatx/ERC2771Context.sol";
 import { ERC721Enumerable } from "@openzeppelin/contracts/token/ERC721/extensions/ERC721Enumerable.sol";
 import "./INFTCreator.sol";
-import "./INFTMetadataCreator.sol";
 
 // NOTE: roleなしで実装
 contract NFTCreator is
@@ -59,9 +58,9 @@ contract NFTCreator is
 
         // Create metadata based on the task and signature
         bytes32 metadata = keccak256(abi.encodePacked(
-            task.name,
-            task.description,
-            task.deadline,
+            task.tokenId,
+            task.owner,
+            task.uri,
             signature
         ));
 
