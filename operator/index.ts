@@ -39,18 +39,8 @@ const signAndRespondToTask = async (taskIndex: number, taskCreatedBlock: number,
 };
 
 const registerOperator = async () => {
-    console.log('(=^・^=)' );
-    // https://docs.rio.network/contracts-and-tooling/source-code/interfaces/eigenlayer/idelegationmanager
-    
-    // https://docs.rio.network/contracts-and-tooling/source-code/interfaces/eigenlayer/idelegationmanager#earningsreceiver
     const earningsReceiver = await wallet.address
-    console.log('earningsReceiver', earningsReceiver);
-    
-    // https://docs.rio.network/contracts-and-tooling/source-code/interfaces/eigenlayer/idelegationmanager#delegationapprover
     const delegationApproverAddress = await delegationManager.delegationApprover(earningsReceiver);
-    console.log('delegationApproverAddress', delegationApproverAddress);
-    // delegationApproverAddress 0x0000000000000000000000000000000000000000
-    
     try {
       const tx1 = await delegationManager.registerAsOperator({
         earningsReceiver: earningsReceiver,
