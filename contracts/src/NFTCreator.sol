@@ -49,6 +49,7 @@ contract NFTCreator is
         latestTaskNum = latestTaskNum + 1;
     }
 
+    // 検証のためにはState更新処理が必要になる
     function respondToTask(
         Task calldata task,
         uint32 referenceTaskIndex,
