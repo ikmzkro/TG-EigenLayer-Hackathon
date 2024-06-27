@@ -20,12 +20,16 @@ contract NFTCreator is
     uint32 public latestTaskNum;
 
     function mint(
-        address to
+        address to,
+        string calldata uri
     ) public {
         uint256 tokenId = tokenIdTracker.current();
         _mint(to, tokenId);
         tokenIdTracker.increment();
         emit Minted(tokenId, to); // to or msg.sender
+
+        _setTokenURI(newTokenId, uri);
+        emit TokenURIChanged(to, newTokenId, uri);
     }
 
     function createNewTask(

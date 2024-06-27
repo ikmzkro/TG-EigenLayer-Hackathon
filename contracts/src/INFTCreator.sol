@@ -4,6 +4,11 @@ pragma solidity ^0.8.9;
 interface INFTCreator {
     // EVENTS
     event Minted(uint256 tokenId, address owner);
+    event TokenURIChanged(
+        address indexed to,
+        uint256 indexed tokenId,
+        string uri
+    );
     event MetadataTaskCreated(uint256 taskNum, Task metadata);
 
     // STRUCTS
