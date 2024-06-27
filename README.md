@@ -1,3 +1,7 @@
+# UseCase Architecture
+
+# Context Map
+
 # Tasks
 ## Contract
 - [ ] NFT作成コントラクト（NFTCreatorContract）
@@ -12,7 +16,9 @@
   - NFTCreatorContractをコールしてNFTをミント
   - HTTPコールでNFTMetadataServerにアクセスし、メタデータを取得
 ## Scope外
-AVS側の検証ロジック
+- [ ] メタデータ検証ロジック
+
+---
 
 # Hello World AVS
 
