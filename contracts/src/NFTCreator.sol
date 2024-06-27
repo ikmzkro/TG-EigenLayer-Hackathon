@@ -18,18 +18,54 @@ contract NFTCreator is
 
     using Counters for Counters.Counter;
     Counters.Counter private tokenIdTracker;
+    uint32 public latestTaskNum;
 
-    function mint(address _to) public {
+    function mint(
+        address to
+    ) public {
         uint256 tokenId = tokenIdTracker.current();
-        _mint(_to, tokenId);
+        _mint(to, tokenId);
         tokenIdTracker.increment();
-        emit Minted(tokenId, _to); // to or msg.sender
+        emit Minted(tokenId, to); // to or msg.sender
     }
 
-    function createEvent(uint256 tokenId) external {
-        address owner = ownerOf(tokenId);
-        emit MetadataCreationRequested(tokenId, owner);
-        metadataCreator.createMetadata(tokenId, owner);
+    function createNewTask(
+        uint256 tokenId,
+        address owner,
+        string memory uri
+    ) external {
+        // create a new task struct
+        Task memory newMetadata;
+        newMetadata.tokenId = tokenId;
+        newMetadata.owner = owner;
+        newMetadata.uri = uri;
+        newMetadata.createdBlock = uint32(block.number);
+
+        allMetadataTaskHashes[latestTaskNum] = keccak256(abi.encode(newMetadata));
+        emit MetadataTaskCreated(latestTaskNum, newMetadata);
+        latestTaskNum = latestTaskNum + 1;
+    }
+
+    function respondToTask(
+        Task calldata task,
+        uint32 referenceTaskIndex,
+        bytes calldata signature
+    ) external view returns (bytes32) {
+        // Check that the task matches the recorded one
+        require(
+            keccak256(abi.encode(task)) == allTaskHashes[referenceTaskIndex],
+            "Supplied task does not match the one recorded in the contract"
+        );
+
+        // Create metadata based on the task and signature
+        bytes32 metadata = keccak256(abi.encodePacked(
+            task.name,
+            task.description,
+            task.deadline,
+            signature
+        ));
+
+        return metadata;
     }
 
     /**
