@@ -8,7 +8,10 @@ datasource db {
 }
 
 model Metadata {
-  id            Int    @id @default(autoincrement())
-  createdAt     BigInt
-  updatedAt     BigInt
+  id        Int    @id @default(autoincrement())
+  tokenId   Int
+  owner     String
+  uri       String
+  createdAt BigInt
+  updatedAt BigInt
 }
