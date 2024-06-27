@@ -1,23 +1,18 @@
 # Tasks
-
+## Contract
 - [ ] NFT作成コントラクト（NFTCreatorContract）
-
   - NFTをミントする関数を実装する
-  - メタデータ作成をトリガーするイベントを発行する
-
+  - メタデータ作成をトリガーするイベント発行関数を実装する
+## Operator
 - [ ] メタデータの作成と保存（NFTMetadataCreator）
-
   - NFTCreatorContractからのイベントを受信してメタデータを作成
   - 作成したメタデータをPrisma等を使ってDBに保存
-
-- [ ] メタデータへのアクセス（NFTMetadataServer）
-
-  - TPリクエストを受け取り、DBからメタデータを取得して返す
-
+## User
 - [ ] CLIからのコントラクトコール
-
   - NFTCreatorContractをコールしてNFTをミント
   - HTTPコールでNFTMetadataServerにアクセスし、メタデータを取得
+## Scope外
+AVS側の検証ロジック
 
 # Hello World AVS
 
