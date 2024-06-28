@@ -4,6 +4,7 @@ import { delegationABI } from "./abis/delegationABI";
 import { contractABI } from './abis/contractABI';
 import { registryABI } from './abis/registryABI';
 import { avsDirectoryABI } from './abis/avsDirectoryABI';
+import { helloWorld} from './wasm/assembly/index';
 dotenv.config();
 
 const provider = new ethers.providers.JsonRpcProvider(process.env.RPC_URL);
@@ -35,7 +36,7 @@ const signAndRespondToTask = async (taskIndex: number, taskCreatedBlock: number,
         signature
     );
     await tx.wait();
-    console.log(`Responded to task.`);
+    console.log(`Responded to "${taskName}".`);
 };
 
 const registerOperator = async () => {
@@ -49,9 +50,8 @@ const registerOperator = async () => {
       }, {
         gasLimit: "300000 "
       });
-      console.log('tx1', tx1);
       await tx1.wait();
-      console.log("Operator registered on EL successfully");
+      console.log("Operator registered on EigenLayer successfully");
     } catch (error) {
       console.log('error', error);
     }
@@ -74,7 +74,8 @@ const registerOperator = async () => {
         expiry
     );
 
-    // Sign the digest hash with the operator's private key
+    // Sign the digest hash with the "operator's private key"
+    // The operator's private key needs to maintain sufficient assets.
     const signingKey = new ethers.utils.SigningKey(process.env.PRIVATE_KEY!);
     const signature = signingKey.signDigest(digestHash);
     
@@ -90,21 +91,31 @@ const registerOperator = async () => {
 };
 
 const monitorNewTasks = async () => {
-    await contract.createNewTask("EigenWorld");
+    // Execute the contract to emit an event and create an event where Pikachu appears.
+    await contract.createNewTask("Go!Pikachu!");
 
+    // Detect that the event has been emitted in the contract, and the Operator signs the event.
     contract.on("NewTaskCreated", async (taskIndex: number, task: any) => {
         console.log(`New task detected: Hello, ${task.name}`);
         await signAndRespondToTask(taskIndex, task.taskCreatedBlock, task.name);
+        // Execute the WASM to summon Pikachu.
+        const monster = helloWorld();
+        console.log('Pika Pika!', monster);
     });
 
     console.log("Monitoring for new tasks...");
 };
 
 const main = async () => {
+  try {
+    // Registering an Operator on EigenLayer and AVS:
     await registerOperator();
-    monitorNewTasks().catch((error) => {
-        console.error("Error monitoring tasks:", error);
-    });
+
+    // Start monitoring new tasks
+    await monitorNewTasks();
+  } catch (error) {
+      console.error("Main function error:", error);
+  }
 };
 
 main().catch((error) => {

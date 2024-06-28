@@ -12,7 +12,6 @@ import "./IHelloWorldServiceManager.sol";
 
 /**
  * @title Primary entrypoint for procuring services from HelloWorld.
- * @author Eigen Labs, Inc.
  */
 contract HelloWorldServiceManager is 
     ECDSAServiceManagerBase,
@@ -115,7 +114,6 @@ contract HelloWorldServiceManager is
     }
 
     // HELPER
-
     function operatorHasMinimumWeight(address operator) public view returns (bool) {
         return ECDSAStakeRegistry(stakeRegistry).getOperatorWeight(operator) >= ECDSAStakeRegistry(stakeRegistry).minimumWeight();
     }
