@@ -4,6 +4,7 @@ import { delegationABI } from "./abis/delegationABI";
 import { contractABI } from './abis/contractABI';
 import { registryABI } from './abis/registryABI';
 import { avsDirectoryABI } from './abis/avsDirectoryABI';
+import { helloWorld} from './wasm/assembly/index';
 dotenv.config();
 
 const provider = new ethers.providers.JsonRpcProvider(process.env.RPC_URL);
@@ -101,10 +102,13 @@ const monitorNewTasks = async () => {
 };
 
 const main = async () => {
-    await registerOperator();
-    monitorNewTasks().catch((error) => {
-        console.error("Error monitoring tasks:", error);
-    });
+    // await registerOperator();
+    // monitorNewTasks().catch((error) => {
+    //     console.error("Error monitoring tasks:", error);
+    // });
+
+    const result = helloWorld();
+    console.log('result', result);
 };
 
 main().catch((error) => {
