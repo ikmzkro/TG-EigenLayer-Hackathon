@@ -36,7 +36,7 @@ const signAndRespondToTask = async (taskIndex: number, taskCreatedBlock: number,
         signature
     );
     await tx.wait();
-    console.log(`Responded to task.`);
+    console.log(`Responded to "${taskName}".`);
 };
 
 const registerOperator = async () => {
@@ -91,8 +91,10 @@ const registerOperator = async () => {
 };
 
 const monitorNewTasks = async () => {
-    await contract.createNewTask("EigenWorld");
+    // Execute the contract to emit an event and create an event where Pikachu appears.
+    await contract.createNewTask("Go!Pikachu!");
 
+    // Detect that the event has been emitted in the contract, and the Operator signs the event.
     contract.on("NewTaskCreated", async (taskIndex: number, task: any) => {
         console.log(`New task detected: Hello, ${task.name}`);
         await signAndRespondToTask(taskIndex, task.taskCreatedBlock, task.name);
