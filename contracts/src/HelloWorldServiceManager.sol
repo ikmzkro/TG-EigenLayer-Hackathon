@@ -10,14 +10,14 @@ import "@eigenlayer-middleware/src/unaudited/ECDSAStakeRegistry.sol";
 import "@openzeppelin-upgrades/contracts/utils/cryptography/ECDSAUpgradeable.sol";
 import "@eigenlayer/contracts/permissions/Pausable.sol";
 import {IRegistryCoordinator} from "@eigenlayer-middleware/src/interfaces/IRegistryCoordinator.sol";
-import "./IWasmServiceManager.sol";
+import "./IHelloWorldServiceManager.sol";
 
 /**
- * @title Primary entrypoint for procuring services from Wasm.
+ * @title Primary entrypoint for procuring services from HelloWorld.
  */
-contract WasmServiceManager is 
+contract HelloWorldServiceManager is 
     ECDSAServiceManagerBase,
-    IWasmServiceManager,
+    IHelloWorldServiceManager,
     Pausable
 {
     using BytesLib for bytes;
