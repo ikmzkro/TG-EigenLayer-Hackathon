@@ -50,7 +50,6 @@ const registerOperator = async () => {
       }, {
         gasLimit: "300000 "
       });
-      console.log('tx1', tx1);
       await tx1.wait();
       console.log("Operator registered on EL successfully");
     } catch (error) {
@@ -102,10 +101,10 @@ const monitorNewTasks = async () => {
 };
 
 const main = async () => {
-    // await registerOperator();
-    // monitorNewTasks().catch((error) => {
-    //     console.error("Error monitoring tasks:", error);
-    // });
+    await registerOperator();
+    monitorNewTasks().catch((error) => {
+        console.error("Error monitoring tasks:", error);
+    });
 
     const result = helloWorld();
     console.log('result', result);
