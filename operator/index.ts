@@ -98,20 +98,24 @@ const monitorNewTasks = async () => {
     contract.on("NewTaskCreated", async (taskIndex: number, task: any) => {
         console.log(`New task detected: Hello, ${task.name}`);
         await signAndRespondToTask(taskIndex, task.taskCreatedBlock, task.name);
+        // Execute the WASM to summon Pikachu.
+        const monster = helloWorld();
+        console.log('Pika Pika!', monster);
     });
 
     console.log("Monitoring for new tasks...");
 };
 
 const main = async () => {
-    // the process for registering an Operator on EigenLayer and AVS:
+  try {
+    // Registering an Operator on EigenLayer and AVS:
     await registerOperator();
-    monitorNewTasks().catch((error) => {
-        console.error("Error monitoring tasks:", error);
-    });
 
-    const result = helloWorld();
-    console.log('result', result);
+    // Start monitoring new tasks
+    await monitorNewTasks();
+  } catch (error) {
+      console.error("Main function error:", error);
+  }
 };
 
 main().catch((error) => {
