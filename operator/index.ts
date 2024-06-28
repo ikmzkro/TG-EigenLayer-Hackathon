@@ -51,7 +51,7 @@ const registerOperator = async () => {
         gasLimit: "300000 "
       });
       await tx1.wait();
-      console.log("Operator registered on EL successfully");
+      console.log("Operator registered on EigenLayer successfully");
     } catch (error) {
       console.log('error', error);
     }
@@ -74,7 +74,8 @@ const registerOperator = async () => {
         expiry
     );
 
-    // Sign the digest hash with the operator's private key
+    // Sign the digest hash with the "operator's private key"
+    // The operator's private key needs to maintain sufficient assets.
     const signingKey = new ethers.utils.SigningKey(process.env.PRIVATE_KEY!);
     const signature = signingKey.signDigest(digestHash);
     
@@ -101,6 +102,7 @@ const monitorNewTasks = async () => {
 };
 
 const main = async () => {
+    // the process for registering an Operator on EigenLayer and AVS:
     await registerOperator();
     monitorNewTasks().catch((error) => {
         console.error("Error monitoring tasks:", error);
