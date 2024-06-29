@@ -1,4 +1,9 @@
 # EigemWasm ⚡🇪🇼⚡
+<div align="center">
+  <img src="https://github.com/vitocchi/TG-EigenLayer-Hackathon/assets/38712518/6a581f0b-7834-4ce9-bd54-f2fdc9bf4aea" alt="Sample Image" width="50%">
+</div>
+
+
 
 ## ⚡Introduction⚡
 This project aims to create a general-purpose contract execution machine running on EigenLayer to address the challenges faced by the EVM, such as scalability limitations and high gas fees. WebAssembly is well-suited for this purpose due to its efficiency, security, and portability. These characteristics make it ideal for creating versatile and reliable contracts. Additionally, using Fault Proofs to pass contract execution costs to operators can significantly improve scalability.
