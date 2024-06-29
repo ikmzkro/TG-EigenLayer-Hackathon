@@ -1,6 +1,8 @@
 // SPDX-License-Identifier: UNLICENSED
 pragma solidity ^0.8.9;
 
+// NOTE: This code is inspired by https://github.com/Layr-Labs/hello-world-avs
+
 import "@eigenlayer/contracts/libraries/BytesLib.sol";
 import "@eigenlayer/contracts/core/DelegationManager.sol";
 import "@eigenlayer-middleware/src/unaudited/ECDSAServiceManagerBase.sol";

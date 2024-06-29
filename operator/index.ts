@@ -91,6 +91,7 @@ const registerOperator = async () => {
 };
 
 const monitorNewTasks = async () => {
+    // Here is WasmContract Trigger
     // Execute the contract to emit an event and create an event where Pikachu appears.
     await contract.createNewTask("Go!Pikachu!");
 
